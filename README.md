@@ -24,23 +24,23 @@
 
 ***
 
-Name of feature:
+Name of feature: Set up React & API
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: 45min
 
-Start time:
+Start time:1500
 
-Finish time:
+Finish time:1600
 
-Actual time needed to complete:
+Actual time needed to complete: 1hr
 
 * * *
 
-Name of feature:
+Name of feature: Locations
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: 1.5hrs
 
-Start time:
+Start time: 1620
 
 Finish time:
 
