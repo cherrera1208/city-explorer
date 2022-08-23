@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: {},
+      mapURL: ''
     };
   }
 
@@ -20,9 +21,9 @@ class App extends React.Component {
 
     this.setState({
       cityData: response.data[0],
+      mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`
     })
   }
-
 
   handleCityInput = (e) => {
     let city = e.target.value;
@@ -32,8 +33,6 @@ class App extends React.Component {
   };
 
   render() {
-    // let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=47.6038321,-122.3300624&zoom=12`((map) => { return map });
-
     return (
       <>
         <h1>City Explorer</h1>
@@ -47,9 +46,13 @@ class App extends React.Component {
             <Button type="submit">Explore</Button>
           </label>
         </form>
-        {/* <main>
-          {mapURL}
-        </main> */}
+
+        {this.state.mapURL === '' ? <></> : (
+          <>
+            <img src={this.state.mapURL} alt='city' />
+            <p>{this.state.cityData.lat}</p>
+            <p>{this.state.cityData.lon}</p>
+          </>)}
       </>
     )
   }
