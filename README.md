@@ -69,6 +69,11 @@ Actual time needed to complete:1hr
 
 ### Web request response cycle (WRRC) whiteboards
 
+Lab06: Asynchronous code and APIs
 ![Lab06: Asynchronous code and APIs](public/img/lab06WRRC.jpg)
+
+Lab07: Custom server with Node and Express
 ![Lab07: Custom server with Node and Express](public/img/lab07WRRC.jpg)
+
+Lab08: Multiple APIs
 ![Lab08: Multiple APIs](public/img/lab08WRRC.jpg)
