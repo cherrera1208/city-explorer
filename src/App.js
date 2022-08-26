@@ -11,11 +11,12 @@ class App extends React.Component {
       city: '',
       cityData: {},
       weatherData: [],
+      movieData: [],
       mapURL: '',
       weatherInfo: '',
       error: false,
       errorMsg: '',
-      displayForecast: '',
+      // // displayForecast: '',
     };
   }
   handleCitySubmit = async (e) => {
@@ -24,24 +25,29 @@ class App extends React.Component {
       let response = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_CITY_KEY}&q=${this.state.city}&format=json`);
       console.log(response.data[0]);
 
-      let forecast = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`)
-      let displayForecast = this.state.weatherData.map((data, idx) => {
-        return (
-          <div>
-            {data.description},
-            {data.date},
-          </div>
-        )
-      });
-      console.log(forecast.data);
-      console.log(this.state.weatherData);
+      let weatherQ = response.data[0];
+      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${weatherQ.lat}&lon=${weatherQ.lon}`);
+      console.log(weatherData.data);
+
+      // // let forecast = await axios.get(`${ process.env.REACT_APP_SERVER } / weather ? city_name = ${ this.state.city }`)
+      // // let displayForecast = this.state.weatherData.map((data, idx) => {
+      // //   return (
+      // //     <div>
+      // //       {data.description},
+      // //       {data.date},
+      // //     </div>
+      // //   )
+      // // });
+      // // console.log(forecast.data);
+      // // console.log(this.state.weatherData);
 
       this.setState({
         error: false,
         cityData: response.data[0],
-        weatherData: forecast.data.queriedCity,
-        displayForecast: displayForecast[0],
+        weatherData: weatherData.data,
         mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`
+        // // weatherData: forecast.data.queriedCity,
+        // // displayForecast: displayForecast[0],
       })
     } catch (error) {
       console.log(error);
@@ -71,7 +77,7 @@ class App extends React.Component {
               onInput={this.handleCityInput}
               name="city"
             />
-            <Button type="submit">Explore</Button>
+            <Button type="submit" variant="primary">Explore</Button>
           </label>
         </form>
         {this.state.error ? (
