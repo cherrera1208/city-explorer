@@ -23,7 +23,7 @@ Built with JavaScript, React, CSS, and React Bootstrap
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
-Thanks to the teaching staff at Code Fellows. Sheyna, Shane, and Michael are always a huge help and full of knowledge. And a thanks and acknowledgement to all of my classmates who helped and collaborated with me, especially David Suy and Jordan Yamada.
+Thanks to the teaching staff at Code Fellows. Sheyna, Shane, and Michael are always a huge help and full of knowledge. And a thanks and acknowledgement to all of my classmates who helped and collaborated with me, especially David Suy, Jordan Yamada, and Brooke heck.
 
 ## Time Estimates
 
@@ -77,3 +77,6 @@ Lab07: Custom server with Node and Express
 
 Lab08: Multiple APIs
 ![Lab08: Multiple APIs](public/img/lab08WRRC.jpg)
+
+Lab10: Cache
+![Lab10](public/img/Lab10-WhiteBoard.png)

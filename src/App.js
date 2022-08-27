@@ -16,7 +16,8 @@ class App extends React.Component {
       weatherInfo: '',
       error: false,
       errorMsg: '',
-      // // displayForecast: '',
+      displayWeather: '',
+      displayMovies: ''
     };
   }
   handleCitySubmit = async (e) => {
@@ -29,40 +30,54 @@ class App extends React.Component {
       let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${weatherQ.lat}&lon=${weatherQ.lon}`);
       console.log(weatherData.data);
 
-      // // let forecast = await axios.get(`${ process.env.REACT_APP_SERVER } / weather ? city_name = ${ this.state.city }`)
-      // // let displayForecast = this.state.weatherData.map((data, idx) => {
-      // //   return (
-      // //     <div>
-      // //       {data.description},
-      // //       {data.date},
-      // //     </div>
-      // //   )
-      // // });
-      // // console.log(forecast.data);
-      // // console.log(this.state.weatherData);
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`)
+
+      let displayWeather = weatherData.data.map((data, idx) => {
+        return (
+          <div>
+            {data.description},
+            {data.date},
+            {data.temp}
+          </div>
+        )
+      });
+
+      let displayMovies = movieData.data.map((data, idx) => {
+        return (
+          <>
+            <div id="movie">
+              <img src={data.imgPath} alt="movie posters" />,
+              {data.title},
+              {data.overview},
+              {data.id}
+            </div>
+          </>
+        )
+      });
+
 
       this.setState({
         error: false,
         cityData: response.data[0],
         weatherData: weatherData.data,
+        movieData: movieData.data,
+        displayWeather: displayWeather,
+        displayMovies: displayMovies,
         mapURL: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_KEY}&center=${response.data[0].lat},${response.data[0].lon}&zoom=12`
-        // // weatherData: forecast.data.queriedCity,
-        // // displayForecast: displayForecast[0],
       })
     } catch (error) {
       console.log(error);
       console.log(this.state.errorMsg);
       this.setState({
         error: true,
-        errorMsg: `An error occurred: ${error.message}`,
+        errorMsg: `An error occurred : ${error.message}`,
       })
     }
-    console.log(this.state.displayForecast);
   }
   handleCityInput = (e) => {
     let city = e.target.value;
     this.setState({
-      city: city
+      city: city,
     });
   };
 
@@ -87,10 +102,11 @@ class App extends React.Component {
           this.state.cityData.lat && !this.state.error
             ?
             <>
-              <img src={this.state.mapURL} alt='city map' />
+              <img id="map" src={this.state.mapURL} alt='city map' />
               <p>Latitude: {this.state.cityData.lat}</p>
               <p>Longitude: {this.state.cityData.lon}</p>
-              {this.state.displayForecast}
+              {this.state.displayWeather}
+              {this.state.displayMovies}
             </>
             :
             <>
