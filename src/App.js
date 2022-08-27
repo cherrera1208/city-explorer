@@ -70,7 +70,7 @@ class App extends React.Component {
       console.log(this.state.errorMsg);
       this.setState({
         error: true,
-        errorMsg: `An error occurred: ${error.message}`,
+        errorMsg: `An error occurred : ${error.message}`,
       })
     }
   }
